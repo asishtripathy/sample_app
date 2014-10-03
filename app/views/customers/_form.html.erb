@@ -1,0 +1,106 @@
+<script>
+    document.title = "<%= title %> Customer "
+</script>
+<div class="row">
+  <div class="col-xs-12">
+    <h1 class="center">
+      Customer
+    </h1>
+  </div>
+</div>
+<div class="row">
+  <div class="col-xs-12">
+    <ul class="page-breadcrumb breadcrumb text-left">
+      <li>
+        <i class="fa fa-home"></i>
+        <a data-no-turbolink="true" href="<%= root_path %>">Customers</a>
+      </li>
+      <li>
+        <a href="javascript:"><%= title %> Customer</a>
+      </li>
+    </ul>
+  </div>
+</div>
+
+
+<div class="row">
+  <div class="col-md-12">
+    <!-- BEGIN FORM-->
+    <%= form_for(@customer, html: {class: "form-horizontal"}) do |f| %>
+        <div class="form-body col-md-6 col-md-offset-3">
+
+          <div class="row center">
+            <div class="col-md-12">
+              <div class="form-group">
+                <label class="control-label col-md-3">First Name</label>
+                <div class="col-md-9">
+                  <%= f.text_field :first_name, class: "form-control" %>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="form-group">
+                <label class="control-label col-md-3">Last Name</label>
+                <div class="col-md-9">
+                  <%= f.text_field :last_name, class: "form-control" %>
+                </div>
+              </div>
+            </div>
+          </div>
+          <%= f.fields_for :addresses do |ad| %>
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label class="control-label col-md-3">Address</label>
+                    <div class="col-md-9">
+                      <%= ad.text_field :address, class: "form-control" %>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label class="control-label col-md-3">City</label>
+                    <div class="col-md-9">
+                      <%= ad.text_field :city, class: "form-control" %>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label class="control-label col-md-3">State</label>
+                    <div class="col-md-9">
+                      <%= ad.text_field :state, class: "form-control" %>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label class="control-label col-md-3">Address Type</label>
+                    <div class="col-md-9">
+                      <%= ad.collection_select :address_type_id, @address_types,:id,:title, class: "form-control" %>
+                    </div>
+                  </div>
+                </div>
+              </div>
+          <% end %>
+          <div class="row">
+            <div class="col-xs-12 center">
+              <button type="submit" class="btn btn-success">Submit</button> &nbsp; &nbsp;
+              <a href="javascript:history.go(-1)" class="btn btn-default">Cancel</a>
+            </div>
+          </div>
+    <% end %>
+    <!-- END FORM-->
+    </div>
+  </div>
+  <!-- END PAGE CONTENT-->
+</div>
+</div>

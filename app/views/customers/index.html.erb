@@ -1,0 +1,70 @@
+<script>
+    document.title = "Customers"
+</script>
+<div class="row">
+  <div class="col-md-12">
+    <h1 class="center">
+      Customers
+    </h1>
+  </div>
+</div>
+<div class="row">
+  <div class="col-xs-7">
+    <ul class="page-breadcrumb breadcrumb">
+      <li>
+        <a data-no-turbolink="true" href="<%= customers_path %>">Customers</a>
+      </li>
+    </ul>
+  </div>
+  <div class="col-xs-5 text-right">
+    <div style="padding: 10px">
+      <a data-no-turbolink="true" href="<%= new_customer_path %>" data-title="Compose" class="btn btn-primary">
+        Add Customer <i class="fa fa-plus"></i></a>
+      <a href="<%= customers_path(:format => :xls) %>"  class="btn btn-success">
+        <i class="fa fa-download"></i></a>
+    </div>
+  </div>
+</div>
+
+<!-- END PAGE HEADER-->
+<!-- BEGIN PAGE CONTENT-->
+<div class="row">
+  <div class="col-md-12">
+    <table class="table table-striped table-bordered table-hover" id="customer-list">
+      <thead>
+      <tr>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>City</th>
+        <th>State</th>
+
+      </tr>
+      </thead>
+      <tbody>
+      <% @customers.each do |customer| %>
+          <tr>
+            <td><%= customer.first_name %></td>
+            <td><%= customer.last_name %></td>
+            <td><%= customer.addresses.first.try(:city) %></td>
+            <td><%= customer.addresses.first.try(:state) %></td>
+            <td><a data-no-turbolink="true" title= "View" href="<%= customer_path(customer) %>">
+                    <i class="fa fa-cog"></i>
+                </a>&nbsp;&nbsp;
+                <a data-no-turbolink="true" title= "Edit" href="<%= edit_customer_path(customer) %>">
+                  <i class="fa fa-edit"></i>
+                </a>
+            </td>
+          </tr>
+      <% end %>
+      </tbody>
+    </table>
+    <!-- END TABLE -->
+  </div>
+</div>
+<script>
+
+    $(document).ready(function(){
+        $('#customer-list').dataTable();
+    });
+
+</script>
